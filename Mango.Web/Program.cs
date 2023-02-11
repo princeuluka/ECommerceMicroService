@@ -3,12 +3,18 @@ using Mango.Web.Services;
 using Mango.Web.Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    // Read from your secrets.
+    .AddUserSecrets<Program>(optional: true)
+    .AddEnvironmentVariables()
+    .Build();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<IProductService, ProductService>();
-SD.ProductAPIBase = builder.Configuration.GetRequiredSection("ServiceUrls:ProductAPI").ToString();
-builder.Services.AddScoped<IProductService, ProductService>();  
+
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
