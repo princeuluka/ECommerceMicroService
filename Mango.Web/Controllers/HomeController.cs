@@ -30,6 +30,18 @@ namespace Mango.Web.Controllers
             return View(list);
         }
 
+        public async Task<IActionResult> Details(int productId)
+        {
+            ProductDto model = new();
+            var response = await _productService.GetAllProductsByIdAsync<ResponseDto>(productId);
+            if (response != null && response.IsSuccess)
+            {
+                model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
+            }
+
+            return View(model);
+        }
+
         public IActionResult Privacy()
         {
             return View();
