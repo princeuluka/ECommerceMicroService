@@ -29,9 +29,6 @@ builder.Services.AddIdentityServer(options =>
 .AddInMemoryClients(SD.Clients);
 
 
-
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
