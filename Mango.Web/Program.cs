@@ -17,6 +17,7 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
 var app = builder.Build();
 builder.Services.AddHttpClient<IProductService, ProductService>();
+builder.Services.AddHttpClient<ICartService, CartService>();
 
 SD.ShoppingCartAPIBase = configuration.GetValue<string>("AppSettings:ShoppingCartAPI");
 SD.ProductAPIBase = configuration.GetValue<string>("AppSettings:ProductAPI");
