@@ -16,6 +16,10 @@ builder.Services.AddHttpClient<IProductService, ProductService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
 var app = builder.Build();
+builder.Services.AddHttpClient<IProductService, ProductService>();
+
+SD.ShoppingCartAPIBase = configuration.GetValue<string>("AppSettings:ShoppingCartAPI");
+SD.ProductAPIBase = configuration.GetValue<string>("AppSettings:ProductAPI");
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
