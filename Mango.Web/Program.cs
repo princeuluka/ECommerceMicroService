@@ -10,18 +10,18 @@ var configuration = new ConfigurationBuilder()
     .AddEnvironmentVariables()
     .Build();
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddHttpClient<IProductService, ProductService>();
-
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
-
-builder.Services.AddHttpClient<ICartService, CartService>();
-var app = builder.Build();
-
 
 SD.ShoppingCartAPIBase = configuration.GetValue<string>("AppSettings:ShoppingCartAPI");
 SD.ProductAPIBase = configuration.GetValue<string>("AppSettings:ProductAPI");
+builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<IProductService, ProductService>();
+builder.Services.AddHttpClient<ICartService, CartService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
+
+var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
