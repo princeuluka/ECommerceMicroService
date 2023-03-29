@@ -1,4 +1,5 @@
 using Mango.Web;
+using Mango.Web.Extensions;
 using Mango.Web.Services;
 using Mango.Web.Services.IServices;
 
@@ -19,6 +20,14 @@ builder.Services.AddHttpClient<ICartService, CartService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
+builder.Services.ConfigureAuthentication(builder.Configuration);
+
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultScheme = "Cookies";
+//    options.DefaultChallengeScheme = "iodc";
+//});
+
 
 var app = builder.Build();
 
@@ -36,7 +45,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

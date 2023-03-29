@@ -9,7 +9,7 @@ namespace Mango.Services.Identity
         public const string Customer = "Customer";
 
 
-        public static IEnumerable<IdentityResource> identityResources =>
+        public static IEnumerable<IdentityResource> IdentityResources =>
            new List<IdentityResource>()
            {
                 new IdentityResources.OpenId(),
